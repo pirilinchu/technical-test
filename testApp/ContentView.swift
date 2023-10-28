@@ -15,7 +15,7 @@ struct ContentView: View {
         withAnimation {
             self.isBannerShowing = true
         }
-        Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { _ in
+        Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { _ in
             withAnimation {
                 self.isBannerShowing = false
             }

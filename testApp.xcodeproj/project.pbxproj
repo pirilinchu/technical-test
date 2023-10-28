@@ -28,6 +28,7 @@
 		FA06B40E2AED463F00E6226D /* PostManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA06B40D2AED463F00E6226D /* PostManager.swift */; };
 		FA06B4102AED5BE200E6226D /* InternetBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA06B40F2AED5BE200E6226D /* InternetBanner.swift */; };
 		FA06B4132AED69FC00E6226D /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA06B4122AED69FC00E6226D /* ViewExtensions.swift */; };
+		FA06B4152AED6CA600E6226D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA06B4142AED6CA600E6226D /* HomeViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		FA06B40D2AED463F00E6226D /* PostManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostManager.swift; sourceTree = "<group>"; };
 		FA06B40F2AED5BE200E6226D /* InternetBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetBanner.swift; sourceTree = "<group>"; };
 		FA06B4122AED69FC00E6226D /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
+		FA06B4142AED6CA600E6226D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +179,7 @@
 			children = (
 				B3700F8A2AECDA9A009C4021 /* HomeView.swift */,
 				B3700F8C2AECDB14009C4021 /* PostCardView.swift */,
+				FA06B4142AED6CA600E6226D /* HomeViewModel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -357,6 +360,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA06B4152AED6CA600E6226D /* HomeViewModel.swift in Sources */,
 				B3700F8D2AECDB14009C4021 /* PostCardView.swift in Sources */,
 				B3700F882AECDA17009C4021 /* PreviewData.swift in Sources */,
 				B3700F862AECD9BF009C4021 /* Post.swift in Sources */,

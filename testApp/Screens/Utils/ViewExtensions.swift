@@ -7,8 +7,8 @@
 
 import SwiftUI
 
+// UIKit extensions
 extension View {
-    
     private var keyWindow: UIWindow? {
         UIApplication.shared.windows.filter {$0.isKeyWindow}.first
     }
@@ -34,5 +34,24 @@ extension View {
     
     func showInternetError() {
         showError(error: .internetError)
+    }
+}
+
+// SwiftUI Extensions
+extension View {
+    func errorView(error: NetworkError, onRetry: (() -> Void)?) -> some View {
+        VStack {
+            Text(error.errorTitle)
+            Text(error.errorDescription ?? "")
+            if let onRetry = onRetry {
+                Button {
+                    onRetry()
+                } label: {
+                    Image(systemName: "arrow.triangle.2.circlepath")
+                        .font(.title)
+                }
+            }
+        }
+
     }
 }

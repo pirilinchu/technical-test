@@ -23,7 +23,6 @@ struct PostDetailsView: View {
                 Text(data.post.body)
                     .font(.body)
                     .multilineTextAlignment(.leading)
-                    .padding()
                 if let url = data.url {
                     VideoPlayer(player: AVPlayer(url: url))
                         .frame(height: 300)
