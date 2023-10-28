@@ -17,6 +17,7 @@ struct PostCardView: View {
             VStack(alignment: .leading) {
                 Text(data.post.title)
                     .font(.title3)
+                    .lineLimit(1)
                     .bold()
                 Text(data.post.body)
                     .font(.body)

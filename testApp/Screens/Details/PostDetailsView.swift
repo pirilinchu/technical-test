@@ -26,20 +26,24 @@ struct PostDetailsView: View {
     var body: some View {
         ScrollView {
             VStack {
+                Text(data.post.body)
+                    .font(.title3)
+                    .bold()
+                    .multilineTextAlignment(.leading)
                 GenericImage(stringUrl: data.album.url)
                     .frame(height: 200)
-                VStack(alignment: .leading) {
-                    Text(data.post.body)
-                        .font(.body)
-                        .multilineTextAlignment(.leading)
-                }
-                .padding()
+                Text(data.post.body)
+                    .font(.body)
+                    .multilineTextAlignment(.leading)
+                    .padding()
                 VideoPlayer(player: player)
                     .frame(height: 300)
             }
-            .padding(.horizontal)
-            .navigationTitle(data.post.title)
-            .navigationBarTitleDisplayMode(.large)
+            .padding()
+        }
+        .onDisappear {
+            player?.pause()
+            player?.replaceCurrentItem(with: nil)
         }
     }
 }

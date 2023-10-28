@@ -8,11 +8,13 @@
 import Foundation
 
 class Album: Codable {
-    let albumId: Int
+    let id: Int
     let url: String
     
     init(albumId: Int, url: String) {
-        self.albumId = albumId
+        self.id = albumId
         self.url = url
     }
 }
+
+typealias AlbumsResponse = [Album]
