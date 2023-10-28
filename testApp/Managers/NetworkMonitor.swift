@@ -20,16 +20,21 @@ final class NetworkMonitor: ObservableObject {
         isConnected
     }
      
-    @Published var isConnected = true
+    var isConnected = true
      
     init() {
         monitor.pathUpdateHandler =  { [weak self] path in
             DispatchQueue.main.async {
-                withAnimation {
-                    self?.isConnected = path.status == .satisfied ? true : false
+                self?.isConnected = path.status == .satisfied ? true : false
+                if path.status != .satisfied {
+                    NotificationCenter.default.post(name: .showInternetBanner, object: nil)
                 }
             }
         }
         monitor.start(queue: queue)
     }
+}
+
+extension Notification.Name {
+    static let showInternetBanner = Notification.Name("ShowInternetBanner")
 }

@@ -11,18 +11,6 @@ import AVKit
 struct PostDetailsView: View {
     let data: MyPost
     
-    let player: AVPlayer?
-    
-    init(data: MyPost) {
-        self.data = data
-        if let url = data.url {
-            self.player = AVPlayer(url: url)
-        } else {
-            self.player = nil
-        }
-        self.player?.play()
-    }
-    
     var body: some View {
         ScrollView {
             VStack {
@@ -36,14 +24,13 @@ struct PostDetailsView: View {
                     .font(.body)
                     .multilineTextAlignment(.leading)
                     .padding()
-                VideoPlayer(player: player)
-                    .frame(height: 300)
+                if let url = data.url {
+                    VideoPlayer(player: AVPlayer(url: url))
+                        .frame(height: 300)
+                }
+                Spacer()
             }
             .padding()
-        }
-        .onDisappear {
-            player?.pause()
-            player?.replaceCurrentItem(with: nil)
         }
     }
 }

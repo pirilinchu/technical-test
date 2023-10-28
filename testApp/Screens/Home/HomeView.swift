@@ -10,11 +10,15 @@ import SwiftUI
 struct HomeView: View {
     @State var data: [MyPost] = []
     @State var selectedPost: MyPost?
-        
+    
     var body: some View {
         List(data) { post in
             PostCardView(data: post)
                 .onTapGesture {
+                    guard NetworkMonitor.shared.isNetworkReachable else {
+                        self.showInternetError()
+                        return
+                    }
                     selectedPost = post
                 }
         }
