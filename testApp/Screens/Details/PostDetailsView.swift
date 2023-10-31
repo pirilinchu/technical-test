@@ -14,13 +14,13 @@ struct PostDetailsView: View {
     var body: some View {
         ScrollView {
             VStack {
-                Text(data.post.body)
+                Text(data.post?.title ?? "")
                     .font(.title3)
                     .bold()
                     .multilineTextAlignment(.leading)
-                GenericImage(stringUrl: data.album.url)
+                GenericImage(stringUrl: data.album?.url)
                     .frame(height: 200)
-                Text(data.post.body)
+                Text(data.post?.body ?? "")
                     .font(.body)
                     .multilineTextAlignment(.leading)
                 if let url = data.url {

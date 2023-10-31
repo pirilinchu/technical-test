@@ -60,6 +60,15 @@ enum NetworkError: LocalizedError {
     case internetError
     case error(error: Error)
     
+    var isInternetError: Bool {
+        return switch self {
+        case .internetError:
+            true
+        default:
+            false
+        }
+    }
+    
     var errorDescription: String? {
         switch self {
         case .unknownError:
@@ -80,6 +89,16 @@ enum NetworkError: LocalizedError {
         case .error:
             "Server Error"
         }
+    }
+}
+
+extension Error {
+    var networkError: NetworkError {
+        self as? NetworkError ?? .unknownError
+    }
+    
+    var isInternetError: Bool {
+        networkError.isInternetError
     }
 }
 

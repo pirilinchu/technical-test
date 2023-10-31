@@ -11,12 +11,24 @@ class PostManager {
     static let shared = PostManager()
     
     let api = ApiManager.shared
+    let db = DBManager.shared
     
     func getPosts() async throws -> [MyPost] {
         async let posts = api.getPosts()
         async let albums = api.getAlbums()
-        let data = try await(posts, albums)
-        return createPosts(from: data.0, with: data.1)
+        do {
+            let data = try await(posts, albums)
+            let customPosts = createPosts(from: data.0, with: data.1)
+            DispatchQueue.main.async {
+                self.db.savePosts(posts: customPosts)
+            }
+            return customPosts
+        } catch {
+            guard !error.isInternetError else {
+                throw error
+            }
+            return db.posts
+        }
     }
     
     func createPosts(from posts: [Post], with albums: [Album]) -> [MyPost] {

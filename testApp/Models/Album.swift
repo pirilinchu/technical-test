@@ -6,14 +6,22 @@
 //
 
 import Foundation
+import RealmSwift
 
-class Album: Codable {
-    let id: Int
-    let url: String
+class Album: Object, Codable {
+    @Persisted(primaryKey: true) var id: ObjectId
+    @Persisted var albumId: Int
+    @Persisted var url: String
     
-    init(albumId: Int, url: String) {
-        self.id = albumId
+    convenience init(albumId: Int, url: String) {
+        self.init()
+        self.albumId = albumId
         self.url = url
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case url
+        case albumId = "id"
     }
 }
 

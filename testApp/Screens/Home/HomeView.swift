@@ -43,6 +43,7 @@ struct HomeView: View {
         .task {
             await viewModel.loadData()
         }
+        .ignoresSafeArea(edges: .bottom)
     }
 }
 
