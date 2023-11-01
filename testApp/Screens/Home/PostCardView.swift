@@ -19,6 +19,7 @@ struct PostCardView: View {
                     .font(.title3)
                     .lineLimit(1)
                     .bold()
+                    .accessibilityIdentifier(String(data.post?.postId ?? -1))
                 if let body = data.post?.body {
                     Text(body)
                         .font(.body)

@@ -14,9 +14,14 @@ enum ViewState {
 }
 
 class HomeViewModel: ObservableObject {
-    @Published var data: [MyPost] = []
+    @Published var data: [MyPost]
     @Published var selectedPost: MyPost?
-    @Published var state: ViewState = .loading
+    @Published var state: ViewState
+    
+    init() {
+        self.data = []
+        self.state = .loading
+    }
     
     func loadData() async {
         state = .loading

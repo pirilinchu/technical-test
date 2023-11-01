@@ -18,6 +18,7 @@ struct PostDetailsView: View {
                     .font(.title3)
                     .bold()
                     .multilineTextAlignment(.leading)
+                    .accessibilityIdentifier(String(data.post?.postId ?? -1))
                 GenericImage(stringUrl: data.album?.url)
                     .frame(height: 200)
                 Text(data.post?.body ?? "")

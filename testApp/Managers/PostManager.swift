@@ -10,8 +10,8 @@ import Foundation
 class PostManager {
     static let shared = PostManager()
     
-    let api = ApiManager.shared
-    let db = DBManager.shared
+    var api = ApiManager.shared
+    var db = DBManager.shared
     
     func getPosts() async throws -> [MyPost] {
         async let posts = api.getPosts()
