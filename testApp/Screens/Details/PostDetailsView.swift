@@ -11,35 +11,26 @@ import AVKit
 struct PostDetailsView: View {
     let data: MyPost
     
-    let player: AVPlayer?
-    
-    init(data: MyPost) {
-        self.data = data
-        if let url = data.url {
-            self.player = AVPlayer(url: url)
-        } else {
-            self.player = nil
-        }
-        self.player?.play()
-    }
-    
     var body: some View {
         ScrollView {
             VStack {
-                GenericImage(stringUrl: data.album.url)
+                Text(data.post?.title ?? "")
+                    .font(.title3)
+                    .bold()
+                    .multilineTextAlignment(.leading)
+                    .accessibilityIdentifier(String(data.post?.postId ?? -1))
+                GenericImage(stringUrl: data.album?.url)
                     .frame(height: 200)
-                VStack(alignment: .leading) {
-                    Text(data.post.body)
-                        .font(.body)
-                        .multilineTextAlignment(.leading)
+                Text(data.post?.body ?? "")
+                    .font(.body)
+                    .multilineTextAlignment(.leading)
+                if let url = data.url {
+                    VideoPlayer(player: AVPlayer(url: url))
+                        .frame(height: 300)
                 }
-                .padding()
-                VideoPlayer(player: player)
-                    .frame(height: 300)
+                Spacer()
             }
-            .padding(.horizontal)
-            .navigationTitle(data.post.title)
-            .navigationBarTitleDisplayMode(.large)
+            .padding()
         }
     }
 }

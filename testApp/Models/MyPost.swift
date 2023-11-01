@@ -6,18 +6,20 @@
 //
 
 import Foundation
+import RealmSwift
 
-class MyPost: Identifiable, Equatable {
-    let id = UUID()
-    let post: Post
-    let album: Album
-    let videoURL: String
+class MyPost: Object, Identifiable {
+    @Persisted(primaryKey: true) var id: ObjectId
+    @Persisted var post: Post?
+    @Persisted var album: Album?
+    @Persisted var videoURL: String
     
     var url: URL? {
         URL(string: videoURL)
     }
     
-    init(post: Post, album: Album, videoURL: String) {
+    convenience init(post: Post, album: Album, videoURL: String) {
+        self.init()
         self.post = post
         self.album = album
         self.videoURL = videoURL

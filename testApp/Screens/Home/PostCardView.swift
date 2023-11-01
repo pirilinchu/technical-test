@@ -12,16 +12,20 @@ struct PostCardView: View {
     
     var body: some View {
         HStack(spacing: 0) {
-            GenericImage(stringUrl: data.album.url)
+            GenericImage(stringUrl: data.album?.url)
                 .frame(width: UIScreen.main.bounds.width * 0.3)
             VStack(alignment: .leading) {
-                Text(data.post.title)
+                Text(data.post?.title ?? "Default title")
                     .font(.title3)
+                    .lineLimit(1)
                     .bold()
-                Text(data.post.body)
-                    .font(.body)
-                    .multilineTextAlignment(.leading)
-                    .lineLimit(4)
+                    .accessibilityIdentifier(String(data.post?.postId ?? -1))
+                if let body = data.post?.body {
+                    Text(body)
+                        .font(.body)
+                        .multilineTextAlignment(.leading)
+                        .lineLimit(4)
+                }
             }
             .padding()
         }

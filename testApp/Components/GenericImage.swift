@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct GenericImage: View {
-    let stringUrl: String
+    let stringUrl: String?
     
     var url: URL? {
-        URL(string: stringUrl)
+        URL(string: stringUrl ?? "")
     }
     
     var placeHolderImage: some View {

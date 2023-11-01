@@ -22,20 +22,17 @@ final class testAppUITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
-        // UI tests must launch the application that they test.
+    func testDetailsScreenForFirstItem_Success() throws {
         let app = XCUIApplication()
         app.launch()
-
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
-        }
+        
+        let timeout = 5.0
+        
+        let postCard = app.staticTexts["1"]
+        XCTAssert(postCard.waitForExistence(timeout: timeout))
+        postCard.tap()
+        
+        let detailsScreen = app.staticTexts["1"]
+        XCTAssert(detailsScreen.waitForExistence(timeout: timeout))
     }
 }

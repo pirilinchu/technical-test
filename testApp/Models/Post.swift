@@ -6,19 +6,28 @@
 //
 
 import Foundation
+import RealmSwift
 
 // MARK: - Post
-class Post: Codable {
-    let userId: Int
-    let id: Int
-    let title: String
-    let body: String
+class Post: Object, Codable {
+    @Persisted(primaryKey: true) var id: ObjectId
+    @Persisted var userId: Int
+    @Persisted var postId: Int
+    @Persisted var title: String
+    @Persisted var body: String
     
-    init(userId: Int, id: Int, title: String, body: String) {
+    convenience init(userId: Int, id: Int, title: String, body: String) {
+        self.init()
+        
         self.userId = userId
-        self.id = id
+        self.postId = id
         self.title = title
         self.body = body
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case userId, title, body
+        case postId = "id"
     }
 }
 

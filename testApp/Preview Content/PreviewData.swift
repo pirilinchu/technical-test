@@ -17,6 +17,6 @@ class PreviewData {
     }
     
     static var myPost: MyPost {
-        MyPost(post: post, album: album, videoURL: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")
+        MyPost(post: post, album: album, videoURL: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp")
     }
 }
