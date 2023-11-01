@@ -9,15 +9,15 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var monitor = NetworkMonitor()
-    @State var isBannerShowing = false
+    @State var banner: InternetBannerType?
     
-    func showInternetBanner() {
+    func showBanner(connected: Bool = false) {
         withAnimation {
-            self.isBannerShowing = true
+            self.banner = connected ? .connection : .error
         }
         Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { _ in
             withAnimation {
-                self.isBannerShowing = false
+                self.banner = nil
             }
         }
     }
@@ -25,12 +25,18 @@ struct ContentView: View {
     var body: some View {
         HomeView()
             .overlay {
-                if isBannerShowing {
-                    InternetBannerOverlay()
+                if let banner = banner {
+                    VStack {
+                        banner.bannerView
+                        Spacer()
+                    }
                 }
             }
             .onReceive(NotificationCenter.default.publisher(for: .showInternetBanner), perform: { _ in
-                self.showInternetBanner()
+                self.showBanner()
+            })
+            .onReceive(NotificationCenter.default.publisher(for: .showConnectionBanner), perform: { _ in
+                self.showBanner(connected: true)
             })
     }
 }

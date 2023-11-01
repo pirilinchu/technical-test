@@ -19,16 +19,32 @@ final class NetworkMonitor: ObservableObject {
     var isNetworkReachable: Bool {
         isConnected
     }
-     
+    
     var isConnected = true
+    
+    var lastStatus: NWPath.Status = .satisfied
      
     init() {
         monitor.pathUpdateHandler =  { [weak self] path in
             DispatchQueue.main.async {
-                self?.isConnected = path.status == .satisfied ? true : false
-                if path.status != .satisfied {
-                    NotificationCenter.default.post(name: .showInternetBanner, object: nil)
+                self?.isConnected = path.status == .satisfied
+                
+                switch path.status {
+                case .satisfied:
+                    if self?.lastStatus == .unsatisfied {
+                        NotificationCenter.default.post(name: .showConnectionBanner, object: nil)
+                    }
+                case .unsatisfied:
+                    if self?.lastStatus == .satisfied {
+                        NotificationCenter.default.post(name: .showInternetBanner, object: nil)
+                    }
+                case .requiresConnection:
+                    print("TBD")
+                @unknown default:
+                    print("TBD")
                 }
+                
+                self?.lastStatus = path.status
             }
         }
         monitor.start(queue: queue)
@@ -37,4 +53,5 @@ final class NetworkMonitor: ObservableObject {
 
 extension Notification.Name {
     static let showInternetBanner = Notification.Name("ShowInternetBanner")
+    static let showConnectionBanner = Notification.Name("ShowConnectionBanner")
 }

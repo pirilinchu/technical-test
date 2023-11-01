@@ -2,49 +2,42 @@
 //  InternetBanner.swift
 //  testApp
 //
-//  Created by Macbook on 28/10/23.
+//  Created by Macbook on 31/10/23.
 //
 
 import SwiftUI
 
-struct InternetBanner: View {
-    let error: NetworkError = .internetError
+enum InternetBannerType {
+    case error
+    case connection
     
-    var body: some View {
-        HStack {
-            Image(systemName: "network.slash")
-                .font(.system(size: 30))
-            
-            VStack(alignment: .leading) {
-                Text(error.errorTitle)
-                    .font(.body)
-                Text(error.errorDescription ?? "")
-                    .font(.subheadline)
-                    .multilineTextAlignment(.leading)
-            }
-            Spacer()
+    var bannerView: Banner {
+        switch self {
+        case .error:
+            return Banner(title: NetworkError.internetError.errorTitle, text: NetworkError.internetError.errorDescription, systemName: "network.slash", color: Color.red)
+        case .connection:
+            return Banner(title: "Connection", text: "Your connection is back", systemName: "network", color: Color.green)
         }
-        .foregroundStyle(.white)
-        .frame(maxWidth: .infinity, alignment: .center)
-        .padding(10)
-        .background(Color.red)
-        .cornerRadius(10)
-        .padding(20)
-        .padding(.top, 50)
-        .transition(AnyTransition.move(edge: .top).combined(with: .opacity))
-        .edgesIgnoringSafeArea(.top)
     }
 }
 
-struct InternetBannerOverlay: View {
-    var body: some View {
-        VStack {
-            InternetBanner()
-            Spacer()
-        }
-    }
-}
+//struct InternetBanner: View {
+//    let error: NetworkError = .internetError
+//
+//    var body: some View {
+//        Banner(title: error.errorTitle, text: error.errorDescription, systemName: "network.slash", color: Color.red)
+//    }
+//}
+//
+//struct ConnectionBanner: View {
+//    var body: some View {
+//        Banner(title: "Connection", text: "Your connection is back", systemName: "network", color: Color.green)
+//    }
+//}
 
 #Preview {
-    InternetBannerOverlay()
+    VStack {
+        InternetBannerType.error.bannerView
+        InternetBannerType.connection.bannerView
+    }
 }

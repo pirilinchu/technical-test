@@ -11,7 +11,7 @@ class ApiManager {
     static let shared = ApiManager()
     
     func getPosts() async throws -> [Post] {
-        guard NetworkMonitor.shared.isConnected else {
+        guard NetworkMonitor.shared.isNetworkReachable else {
             throw NetworkError.internetError
         }
         
@@ -28,12 +28,17 @@ class ApiManager {
             let decodedResponse = try JSONDecoder().decode(PostsResponse.self, from: data)
             return decodedResponse
         } catch {
+            if let urlError = error as? URLError {
+                if urlError.code == .notConnectedToInternet {
+                    throw NetworkError.internetError
+                }
+            }
             throw NetworkError.error(error: error)
         }
     }
     
     func getAlbums() async throws -> [Album] {
-        guard NetworkMonitor.shared.isConnected else {
+        guard NetworkMonitor.shared.isNetworkReachable else {
             throw NetworkError.internetError
         }
         
@@ -50,6 +55,11 @@ class ApiManager {
             let decodedResponse = try JSONDecoder().decode(AlbumsResponse.self, from: data)
             return decodedResponse
         } catch {
+            if let urlError = error as? URLError {
+                if urlError.code == .notConnectedToInternet {
+                    throw NetworkError.internetError
+                }
+            }
             throw NetworkError.error(error: error)
         }
     }

@@ -29,11 +29,7 @@ class HomeViewModel: ObservableObject {
             data = try await PostManager.shared.getPosts()
             state = .success
         } catch {
-            guard let error = error as? NetworkError else {
-                state = .error(.unknownError)
-                return
-            }
-            state = .error(error)
+            state = .error(error.networkError)
         }
     }
     

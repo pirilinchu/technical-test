@@ -24,7 +24,7 @@ class PostManager {
             }
             return customPosts
         } catch {
-            guard !error.isInternetError else {
+            guard error.isInternetError else {
                 throw error
             }
             return db.posts
