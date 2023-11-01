@@ -15,7 +15,7 @@
 
 ### To Impove:
 
-- Developing a custom VideoPlayer must be implemented, it will allow more flexibility and controll over the video. The recomended apporach is to create a UIViewController with an AVPlayerViewController exposed to SwiftUI with a UIViewRepresentable.
+- Developing a custom VideoPlayer must be done, it will allow more flexibility and controll over the video. The recomended apporach is to create a UIViewController with an AVPlayerViewController exposed to SwiftUI with a UIViewRepresentable.
 - Localizable String Variables could be added
 - Error handling could be improve
 - Generics could be used if more views are added, especially to the Banner
